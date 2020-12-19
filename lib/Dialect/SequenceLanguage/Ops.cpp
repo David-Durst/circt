@@ -12,7 +12,7 @@
 
 using namespace mlir;
 using namespace circt;
-using namespace circt::staticlogic;
+using namespace circt::sequencelanguage;
 
 #define GET_OP_CLASSES
 #include "circt/Dialect/SequenceLanguage/SequenceLanguage.cpp.inc"

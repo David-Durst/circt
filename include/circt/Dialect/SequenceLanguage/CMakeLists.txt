@@ -1,4 +1,4 @@
-add_circt_dialect(StaticLogic staticlogic)
-add_circt_doc(StaticLogic -gen-op-doc staticlogic Dialect/)
+add_circt_dialect(SequenceLanguage sequencelanguage)
+add_circt_doc(SequenceLanguage -gen-op-doc sequencelanguage Dialect/)
 
-set(LLVM_TARGET_DEFINITIONS StaticLogic.td)
+set(LLVM_TARGET_DEFINITIONS SequenceLanguage.td)

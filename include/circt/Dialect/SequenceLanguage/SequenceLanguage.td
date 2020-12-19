@@ -26,6 +26,18 @@ def SequenceLanguage_Dialect : Dialect {
   let cppNamespace = "::circt::sequencelanguage";
 }
 
+def AbsOp : Op<SequenceLanguage_Dialect, "abs", [NoSideEffect]> {
+  let summary = "absolute value operation";
+  let description = [{
+    The "sequencelanguage.abs" operation represents an absolute value on an int atom.
+  }];
+
+  let arguments = (ins AnySignlessInteger:$in);
+  let results = (outs AnySignlessInteger:$out);
+
+  //let verifier = [{ this-> }];
+}
+
 def PipelineOp : Op<SequenceLanguage_Dialect, "pipeline", [NoSideEffect]> {
   let summary = "pipeline operation";
   let description = [{
