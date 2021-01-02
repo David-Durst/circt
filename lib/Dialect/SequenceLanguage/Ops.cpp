@@ -8,13 +8,21 @@
 //===----------------------------------------------------------------------===//
 
 #include "circt/Dialect/SequenceLanguage/SequenceLanguage.h"
+#include "mlir/IR/Attributes.h"
+#include "mlir/IR/Builders.h"
+#include "mlir/IR/DialectImplementation.h"
 #include "mlir/IR/FunctionImplementation.h"
+#include "mlir/IR/FunctionSupport.h"
+#include "mlir/IR/Matchers.h"
+#include "mlir/IR/Module.h"
+#include "mlir/IR/PatternMatch.h"
+#include "mlir/IR/StandardTypes.h"
 
 using namespace mlir;
 using namespace circt;
 using namespace circt::sequencelanguage;
 
-static LogicalResult verifyMapTypesMatch(MapOp *op) {
+static LogicalResult verifyMapTypesMatch2(MapOp *op) {
     FunctionType f_t = op->f().getType().cast<FunctionType>();
     Type in_t = op->in().getType();
     if (f_t.getInput(0) != in_t) {
@@ -26,16 +34,3 @@ static LogicalResult verifyMapTypesMatch(MapOp *op) {
 
     return success();
 }
-
-#define GET_OP_CLASSES
-#include "circt/Dialect/SequenceLanguage/SequenceLanguage.cpp.inc"
-
-SequenceLanguageDialect::SequenceLanguageDialect(MLIRContext *context)
-    : Dialect(getDialectNamespace(), context,
-    ::mlir::TypeID::get<SequenceLanguageDialect>()) {
-  addOperations<
-#define GET_OP_LIST
-#include "circt/Dialect/SequenceLanguage/SequenceLanguage.cpp.inc"
-      >();
-}
-

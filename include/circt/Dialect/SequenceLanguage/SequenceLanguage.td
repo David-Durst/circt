@@ -35,7 +35,7 @@ def MapOp : Op<SequenceLanguage_Dialect, "map", [NoSideEffect]> {
   let arguments = (ins AnyType:$in, AnySignedInteger:$n, FunctionType:$f);
   let results = (outs AnyType:$out);
 
-  let verifier = [{ return ::verifyMapTypesMatch(this); }];
+  let verifier = [{ return ::verifyMapTypesMatchawkladsldkjasd(this); }];
 }
 
 def AbsOp : Op<SequenceLanguage_Dialect, "abs", [NoSideEffect]> {
