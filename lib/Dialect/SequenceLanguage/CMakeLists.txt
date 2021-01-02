@@ -4,8 +4,9 @@ set(LLVM_OPTIONAL_SOURCES
   Ops.cpp
   )
 
+file(GLOB globbed *.cpp)
 add_mlir_dialect_library(MLIRSequenceLanguageOps
-  Ops.cpp
+  ${globbed}
 
   ADDITIONAL_HEADER_DIRS
   ${PROJECT_SOURCE_DIR}/include
