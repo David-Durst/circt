@@ -25,3 +25,16 @@ SequenceLanguageDialect::SequenceLanguageDialect(MLIRContext *context)
 #include "circt/Dialect/SequenceLanguage/SequenceLanguage.cpp.inc"
       >();
 }
+
+static LogicalResult verifyMapTypesMatch(MapOp *op) {
+    FunctionType f_t = op->f().getType().cast<FunctionType>();
+    Type in_t = op->in().getType();
+    if (f_t.getInput(0) != in_t) {
+        return op->emitError("Map f input type 0 '")
+            << f_t.getInput(0)
+            << " doesn't match map input type"
+            << in_t;
+    }
+
+    return success();
+}
