@@ -14,18 +14,6 @@ using namespace mlir;
 using namespace circt;
 using namespace circt::sequencelanguage;
 
-#define GET_OP_CLASSES
-#include "circt/Dialect/SequenceLanguage/SequenceLanguage.cpp.inc"
-
-SequenceLanguageDialect::SequenceLanguageDialect(MLIRContext *context)
-    : Dialect(getDialectNamespace(), context,
-    ::mlir::TypeID::get<SequenceLanguageDialect>()) {
-  addOperations<
-#define GET_OP_LIST
-#include "circt/Dialect/SequenceLanguage/SequenceLanguage.cpp.inc"
-      >();
-}
-
 static LogicalResult verifyMapTypesMatch(MapOp *op) {
     FunctionType f_t = op->f().getType().cast<FunctionType>();
     Type in_t = op->in().getType();
@@ -38,3 +26,16 @@ static LogicalResult verifyMapTypesMatch(MapOp *op) {
 
     return success();
 }
+
+#define GET_OP_CLASSES
+#include "circt/Dialect/SequenceLanguage/SequenceLanguage.cpp.inc"
+
+SequenceLanguageDialect::SequenceLanguageDialect(MLIRContext *context)
+    : Dialect(getDialectNamespace(), context,
+    ::mlir::TypeID::get<SequenceLanguageDialect>()) {
+  addOperations<
+#define GET_OP_LIST
+#include "circt/Dialect/SequenceLanguage/SequenceLanguage.cpp.inc"
+      >();
+}
+
