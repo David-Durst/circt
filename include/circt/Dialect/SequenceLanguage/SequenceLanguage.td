@@ -35,7 +35,7 @@ def MapOp : Op<SequenceLanguage_Dialect, "map", [NoSideEffect]> {
   let arguments = (ins AnyType:$in, AnySignedInteger:$n, FunctionType:$f);
   let results = (outs AnyType:$out);
 
-  let verifier = [{ ::verifyMapTypesMatch(*this) }];
+  let verifier = [{ return ::verifyMapTypesMatch(this); }];
 }
 
 def AbsOp : Op<SequenceLanguage_Dialect, "abs", [NoSideEffect]> {
@@ -46,8 +46,6 @@ def AbsOp : Op<SequenceLanguage_Dialect, "abs", [NoSideEffect]> {
 
   let arguments = (ins AnySignlessInteger:$in);
   let results = (outs AnySignlessInteger:$out);
-
-  //let verifier = [{ this-> }];
 }
 
 def PipelineOp : Op<SequenceLanguage_Dialect, "pipeline", [NoSideEffect]> {
