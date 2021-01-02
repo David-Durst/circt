@@ -8,6 +8,7 @@
 //===----------------------------------------------------------------------===//
 
 #include "circt/Dialect/SequenceLanguage/SequenceLanguage.h"
+#include "circt/Dialect/SequenceLanguage/Types.h"
 #include "mlir/IR/FunctionImplementation.h"
 
 using namespace mlir;
@@ -22,6 +23,14 @@ static LogicalResult verifyMapTypesMatch(MapOp *op) {
             << f_t.getInput(0)
             << " doesn't match map input type"
             << in_t;
+    }
+
+    Type out_t = op->out().getType();
+    if (f_t.getResult(0) != out_t) {
+        return op->emitError("Map f output type '")
+            << f_t.getResult(0)
+            << " doesn't match map output type"
+            << out_t;
     }
 
     return success();

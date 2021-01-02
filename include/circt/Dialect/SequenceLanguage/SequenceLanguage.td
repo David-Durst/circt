@@ -26,6 +26,8 @@ def SequenceLanguage_Dialect : Dialect {
   let cppNamespace = "::circt::sequencelanguage";
 }
 
+include "Types.td"
+
 def MapOp : Op<SequenceLanguage_Dialect, "map", [NoSideEffect]> {
   let summary = "absolute value operation";
   let description = [{
