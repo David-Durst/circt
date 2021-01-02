@@ -29,7 +29,7 @@ def SequenceLanguage_Dialect : Dialect {
 def MapOp : Op<SequenceLanguage_Dialect, "map", [NoSideEffect]> {
   let summary = "absolute value operation";
   let description = [{
-    The "sequencelanguage.abs" operation represents a map on an arbitrary sequence.
+    The "sequencelanguage.map" operation represents a map on an arbitrary sequence.
   }];
 
   let arguments = (ins AnyType:$in, AnySignedInteger:$n, FunctionType:$f);
