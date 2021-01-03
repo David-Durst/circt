@@ -27,6 +27,7 @@
 #include "circt/Dialect/RTL/RTLDialect.h"
 #include "circt/Dialect/SV/SVDialect.h"
 #include "circt/Dialect/StaticLogic/StaticLogic.h"
+#include "circt/Dialect/SequenceLanguage/SequenceLanguage.h"
 #include "mlir/Dialect/Affine/IR/AffineOps.h"
 #include "mlir/Dialect/LLVMIR/LLVMDialect.h"
 #include "mlir/Dialect/StandardOps/IR/Ops.h"
@@ -110,6 +111,8 @@ int main(int argc, char **argv) {
   staticlogic::registerStandardToStaticLogicPasses();
   handshake::registerStandardToHandshakePasses();
   handshake::registerHandshakeToFIRRTLPasses();
+
+  registry.insert<sequencelanguage::SequenceLanguageDialect>();
 
   registry.insert<esi::ESIDialect>();
   esi::registerESIPasses();

@@ -63,9 +63,9 @@ def AbsOp : Op<SequenceLanguage_Dialect, "abs", [NoSideEffect]> {
 }
 
 def AddOp : Op<SequenceLanguage_Dialect, "add", [NoSideEffect]> {
-  let summary = "absolute value operation";
+  let summary = "addition operation";
   let description = [{
-    The "sequencelanguage.abs" operation represents an addition on two int atoms.
+    The "sequencelanguage.add" operation represents an addition on two int atoms.
   }];
 
   let arguments = (ins AnySignlessInteger:$in0, AnySignlessInteger:$in1);

@@ -5,17 +5,21 @@ set(LLVM_OPTIONAL_SOURCES
   )
 
 file(GLOB globbed *.cpp)
-add_mlir_dialect_library(MLIRSequenceLanguageOps
+add_circt_dialect_library(CIRCTSequenceLanguage
   ${globbed}
 
   ADDITIONAL_HEADER_DIRS
-  ${PROJECT_SOURCE_DIR}/include
-  ${PROJECT_BINARY_DIR}/include
+  ${CIRCT_MAIN_INCLUDE_DIR}/circt/Dialect/SequenceLanguage
 
   LINK_LIBS PUBLIC
   MLIRStandard
   MLIRIR
 
+  LINK_COMPONENTS
+  Support
+
   DEPENDS
   MLIRSequenceLanguageIncGen
 )
+
+add_dependencies(circt-headers MLIRSequenceLanguageIncGen)
