@@ -29,15 +29,27 @@ def SequenceLanguage_Dialect : Dialect {
 include "Types.td"
 
 def MapOp : Op<SequenceLanguage_Dialect, "map", [NoSideEffect]> {
-  let summary = "absolute value operation";
+  let summary = "unary map operation";
   let description = [{
-    The "sequencelanguage.map" operation represents a map on an arbitrary sequence.
+    The "sequencelanguage.map" operation represents a map of a unary operator on an arbitrary sequence.
   }];
 
   let arguments = (ins SeqTypeConstraint:$in, FunctionType:$f);
   let results = (outs SeqTypeConstraint:$out);
 
   let verifier = [{ return ::verifyMapTypesMatch(this); }];
+}
+
+def Map2Op : Op<SequenceLanguage_Dialect, "map2", [NoSideEffect]> {
+  let summary = "binary map operation";
+  let description = [{
+    The "sequencelanguage.map2" operation represents a map of a binary operator on two sequences.
+  }];
+
+  let arguments = (ins SeqTypeConstraint:$in0, SeqTypeConstraint:$in1, FunctionType:$f);
+  let results = (outs SeqTypeConstraint:$out);
+
+  let verifier = [{ return ::verifyMap2TypesMatch(this); }];
 }
 
 def AbsOp : Op<SequenceLanguage_Dialect, "abs", [NoSideEffect]> {
@@ -47,6 +59,16 @@ def AbsOp : Op<SequenceLanguage_Dialect, "abs", [NoSideEffect]> {
   }];
 
   let arguments = (ins AnySignlessInteger:$in);
+  let results = (outs AnySignlessInteger:$out);
+}
+
+def AddOp : Op<SequenceLanguage_Dialect, "add", [NoSideEffect]> {
+  let summary = "absolute value operation";
+  let description = [{
+    The "sequencelanguage.abs" operation represents an addition on two int atoms.
+  }];
+
+  let arguments = (ins AnySignlessInteger:$in0, AnySignlessInteger:$in1);
   let results = (outs AnySignlessInteger:$out);
 }
 
