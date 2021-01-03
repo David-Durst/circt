@@ -34,7 +34,7 @@ def MapOp : Op<SequenceLanguage_Dialect, "map", [NoSideEffect]> {
     The "sequencelanguage.map" operation represents a map on an arbitrary sequence.
   }];
 
-  let arguments = (ins SeqTypeConstraint:$in, AnySignedInteger:$n, FunctionType:$f);
+  let arguments = (ins SeqTypeConstraint:$in, FunctionType:$f);
   let results = (outs SeqTypeConstraint:$out);
 
   let verifier = [{ return ::verifyMapTypesMatch(this); }];

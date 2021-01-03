@@ -17,20 +17,27 @@ using namespace circt::sequencelanguage;
 
 static LogicalResult verifyMapTypesMatch(MapOp *op) {
     FunctionType f_t = op->f().getType().cast<FunctionType>();
-    Type in_t = op->in().getType();
-    if (f_t.getInput(0) != in_t) {
-        return op->emitError("Map f input type 0 '")
+    SeqType in_t = op->in().getType().cast<SeqType>();
+    if (f_t.getInput(0) != in_t.getT()) {
+        return op->emitError("Map f input type ")
             << f_t.getInput(0)
-            << " doesn't match map input type"
+            << " doesn't match element of input seq type"
             << in_t;
     }
 
-    Type out_t = op->out().getType();
-    if (f_t.getResult(0) != out_t) {
-        return op->emitError("Map f output type '")
+    SeqType out_t = op->out().getType().cast<SeqType>();
+    if (f_t.getResult(0) != out_t.getT()) {
+        return op->emitError("Map f output type ")
             << f_t.getResult(0)
-            << " doesn't match map output type"
+            << " doesn't match element of output seq type"
             << out_t;
+    }
+
+    if (in_t.getN() != out_t.getN()) {
+        return op->emitError("Map input length ")
+            << out_t.getN()
+            << " doesn't match output length "
+            << out_t.getN();
     }
 
     return success();
