@@ -12,7 +12,7 @@
 
 #include "mlir/IR/Types.h"
 
-#define GET_SEQ_TYPEDEF_CLASSES
+#define GET_TYPEDEF_CLASSES
 #include "circt/Dialect/SequenceLanguage/SequenceLanguageTypes.h.inc"
 
 #endif // CIRCT_DIALECT_SEQUENCELANGUAGE_TYPES_H
